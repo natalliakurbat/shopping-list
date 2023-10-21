@@ -1,23 +1,32 @@
 /* Новые элементы должны добавляться в список по нажатию на Enter */
-const sendInput = document.querySelector('.input');
-const itemsList = document.querySelector('.items');
+const sendInput = document.querySelector('#input');
+const itemsList = document.querySelector('#items');
 
-if (sendInput) {
-    sendInput.addEventListener('keydown', function(event) {
 
-        if (event.key == 'Enter') {
-            const inputText = sendInput.value;
+sendInput.addEventListener('keydown', function(event) {
 
-            const newInput = document.createElement('div');
-            newInput.classList.add('items');
-            newInput.textContent = inputText;
+    if (event.key === 'Enter') {
+        const inputText = sendInput.value;
 
-            if (itemsList) {
-                itemsList.append(newInput);
-            }
-        }
-    });
-}
+        const newItem = document.createElement('div');
+        newItem.classList.add('items');
+        newItem.textContent = inputText;
+
+        itemsList.append(newItem);
+
+
+        sendInput.value = '';
+
+        newItem.addEventListener('click', function() {
+            newItem.classList.toggle('done');
+        });
+
+    }
+
+});
+
+
+
 
 /* Пустые элементы не должны добавляться */
 
